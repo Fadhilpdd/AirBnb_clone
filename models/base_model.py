@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import uuid
+from models.engine.file_storage import storage
 from datetime import datetime
 
 class BaseModel:
@@ -19,6 +20,8 @@ class BaseModel:
 
     def save(self):
         self.updated_at = datetime.today()
+        storage.new(self)
+        storage.save()
 
     def to_dict(self):
         obj_dict = self.__dict__.copy()
